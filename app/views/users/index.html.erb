@@ -3,11 +3,11 @@
     <% @users.each do |user| %>
       <li>
         Name: <%= user.name %>
-        <span class="profile-link">
-          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+        <span class="profile-link py-4">
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link btn-success btn' %>
 
            <%if !(@current_user.id == user.id)%>
-          <%= link_to request_status(current_user.id,user.id), send_req_user_path(:id => user.id), class: "link-blue"%>
+          <%= link_to request_status(current_user.id,user.id), send_req_user_path(:id => user.id), class: "link-blue py-4"%>
           <% end%>
         </span>
       </li>
