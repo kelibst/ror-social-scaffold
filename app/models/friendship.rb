@@ -7,6 +7,6 @@ class Friendship < ApplicationRecord
 
   def friendship_exist?
     raise ActiveRecord::Rollback if Friendship.where(user_id: user_id, friend_id: friend_id).exists? ||
-                                    Friendship.where(user_id: friend_id, friend_id: user_id).exists?
+                                Friendship.where(user_id: friend_id, friend_id: user_id).exists?
   end
 end
