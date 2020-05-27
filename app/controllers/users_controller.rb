@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_current_user, only: [:show, :index, :destroy]
-  
+  before_action :set_current_user, only: %i[show index destroy]
+
   def index
     @users = User.all
   end
@@ -33,8 +33,8 @@ class UsersController < ApplicationController
     friend_obj = Friendship.where(user_id: current_user.id, friend_id: params[:id]).select('id')
     Friendship.destroy(friend_obj.ids)
   end
-  
-  private 
+
+  private
 
   def set_current_user
     @current_user = User.find(current_user.id)

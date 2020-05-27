@@ -9,6 +9,7 @@ describe 'Friend request testging', type: :feature do
     b.save
     c = Friendship.new(user_id: 1, friend_id: 2, confirmed: false)
     c.save
+    c.confirmed = true
     visit '/users/sign_in'
     within('form') do
       fill_in 'user[email]', with: 'user@example.com'
@@ -20,10 +21,15 @@ describe 'Friend request testging', type: :feature do
     visit '/users'
     expect(page).to have_content 'send request'
   end
-  it 'send request' do
+  it 'sends request' do
     visit 'users'
     first(:link, 'send request').click
 
     expect(page).to have_content 'cancel request'
+  end
+
+  it 'redirects logged in users request' do
+    visit '/users/sign_in'
+    expect(page).to have_content 'You are already signed in.'
   end
 end

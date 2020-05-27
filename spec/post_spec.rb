@@ -23,4 +23,11 @@ describe 'Testing post controller and views', type: :feature do
     click_button 'Save'
     expect(page).to have_content 'Some random contents'
   end
+
+  it 'should be able to create a post' do
+    User.create(id: 1, email: 'user@example.com', password: 'password')
+
+    post1 = Post.create(content: 'some posts', user_id: 1)
+    expect(post1).to be_valid
+  end
 end

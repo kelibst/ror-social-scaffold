@@ -27,5 +27,4 @@ module ApplicationHelper
 
     'send request'
   end
-
 end

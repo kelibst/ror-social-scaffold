@@ -25,11 +25,10 @@ class PostsController < ApplicationController
     user if friend1.exists? || friend2.exists? || user == current_user.id
   end
 
-
   def timeline_posts
     @all_posts ||= Post.all.ordered_by_most_recent.includes(:user)
     @timeline_posts = []
-    
+
     @all_posts.each do |post|
       @timeline_posts.push(post) if post.user_id == friends(post.user_id)
     end
