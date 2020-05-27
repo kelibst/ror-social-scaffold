@@ -32,4 +32,15 @@ describe 'Friend request testging', type: :feature do
     visit '/users/sign_in'
     expect(page).to have_content 'You are already signed in.'
   end
+
+  it 'Testing that friend request hit the database' do
+    visit 'users'
+    expect { first(:link, 'send request').click }.to change { Friendship.count }.by(1)
+  end
+
+  it 'Testing that friend cancel hits the database' do
+    visit 'users'
+    first(:link, 'send request').click
+    expect { first(:link, 'cancel request').click }.to change { Friendship.count }.by(-1)
+  end
 end
