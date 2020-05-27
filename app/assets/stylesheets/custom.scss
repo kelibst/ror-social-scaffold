@@ -294,6 +294,17 @@ form {
   }
 }
 
+.card{
+  border: .5px solid grey;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+
+  h2{
+    padding: 20px;
+  }
+}
+
 .p{
 
   &y{

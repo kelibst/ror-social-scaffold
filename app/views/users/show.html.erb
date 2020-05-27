@@ -1,5 +1,18 @@
 <section class="user-section">
+<div class=card>
   <h2><%= "Name: #{@user.name}" %></h2>
+   <%if !(@current_user.id == @user.id)%>
+      <%= link_to request_status(current_user.id,@user.id), send_req_user_path(:id => @user.id), class: "link-blue py-4"%>
+
+      <% if request_status(current_user.id,@user.id) == 'Accept request'%>
+   
+    <%= link_to 'Delete request', send_req_user_path(:id => @user.id), class: "link-blue py-4"%>
+  
+      <% end %>
+    <% end%>
+ 
+</div>
+  </div>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
