@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+ .link-blue {
+    color: #fff;
+    padding: 10px;
+    background: #1212b4;
+    border-radius: 5px;
+  }

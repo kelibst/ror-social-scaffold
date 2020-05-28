@@ -283,20 +283,56 @@ form {
   }
 }
 
+.btn{
+ 
+  border-radius: 5px;
+  padding: 10px;
+  &-success{
+    background: green;
+    color: white;
+    border-radius: 5px;
+  }
+}
+
+.card{
+  border: .5px solid grey;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+
+  h2{
+    padding: 20px;
+  }
+}
+
+.p{
+
+  &y{
+    &-4{
+      padding: 20px 0;
+    }
+  }
+}
 .users-section {
   width: 100%;
   margin: 10px;
 
   .users-list li {
+   
+
     margin-bottom: 16px;
     text-transform: capitalize;
     font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    margin: 16px 10px;
+    padding: 20px;
   }
 
   .profile-link {
     font-size: 0.8em;
     margin: 0 0 8px 0;
-    color: $primary-color-dark;
+    // color: $primary-color-dark;
   }
 }
 
