@@ -6,7 +6,7 @@
 
       <% if request_status(current_user.id,@user.id) == 'Accept request'%>
    
-    <%= link_to 'Delete request', send_req_user_path(:id => @user.id), class: "link-blue py-4"%>
+    <%= link_to 'Delete request', delete_req_user_path(:id => @user.id), method: :delete, data: {confirm: "You are about to delete this request"}, class: "link-blue py-4"%>
   
       <% end %>
     <% end%>
