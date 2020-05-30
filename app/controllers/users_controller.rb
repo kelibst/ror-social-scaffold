@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @mutual = mutual_friends(current_user, @user)
     @posts = @user.posts.ordered_by_most_recent
   end
 
@@ -33,10 +34,18 @@ class UsersController < ApplicationController
     
   end
 
+  def mutual_friends(current_user, user)
+    counter = 0
+    user.friendships.confirmed.each do |mutual|
+      counter +=1 if current_user.friendships.isFriends(current_user, user)
+    end
+    counter
+  end
+
   def destroy_req
       friend_obj = Friendship.where(user_id: params[:id], friend_id: current_user.id)
       Friendship.destroy(friend_obj.ids)
-      redirect_to users_path, notice: "Friend request is cancelled!"
+      redirect_to users_path, notice: "Friend request is deleted!"
   end
 
   private
