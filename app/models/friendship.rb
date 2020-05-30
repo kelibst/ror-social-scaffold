@@ -10,9 +10,6 @@ class Friendship < ApplicationRecord
                                     Friendship.where(user_id: friend_id, friend_id: user_id).exists?
   end
 
-  
-
-  scope :isFriends, ->(current_user, user) {where(user_id: current_user.id, friend_id: user.id)}
-  scope :confirmed, ->{ where(confirmed: true) }
- 
+  scope :isFriends, ->(current_user, user) { where(user_id: current_user.id, friend_id: user.id) }
+  scope :confirmed, -> { where(confirmed: true) }
 end

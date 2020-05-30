@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def request_status(user1, user2)
-    return  "Unfriend" if Friendship.where(user_id: user1, friend_id: user2, confirmed: true).exists? ||
+    return 'Unfriend' if Friendship.where(user_id: user1, friend_id: user2, confirmed: true).exists? ||
                          Friendship.where(user_id: user2, friend_id: user1, confirmed: true).exists?
 
     return 'Accept request' if Friendship.where(user_id: user2, friend_id: user1, confirmed: false).exists?
