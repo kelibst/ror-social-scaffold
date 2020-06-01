@@ -12,7 +12,7 @@
     <% end%>
       <% if current_user == @user %>
 
-       <p class="friends">Total number of Friends <%= @user.inverse_friendships.count%></p>
+       <p class="friends">Total number of Friends <%= @user.inverse_friendships.all.count%></p>
       <% elsif%>
         <p>Mutual Friends</p>
         <%= @mutual %>

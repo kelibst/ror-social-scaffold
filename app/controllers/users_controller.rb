@@ -49,8 +49,10 @@ class UsersController < ApplicationController
   end
 
   def destroy_req
-    friend_obj = Friendship.where(user_id: params[:id], friend_id: current_user.id)
-    Friendship.destroy(friend_obj.ids)
+    friend = Friendship.where(user_id: params[:id], friend_id: current_user.id)
+    friend_inverse = Friendship.where(user_id: current_user.id, friend_id: params[:id])
+    Friendship.destroy(friend.ids)
+    Friendship.destroy(friend_inverse.ids)
     redirect_to users_path, notice: 'Friend request is deleted!'
   end
 
