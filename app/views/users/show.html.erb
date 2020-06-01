@@ -1,15 +1,24 @@
 <section class="user-section">
 <div class=card>
-  <h2><%= "Name: #{@user.name}" %></h2>
+  <h2><%= "Welcome: #{@user.name}" unless @current_user != @user %></h2>
    <%if !(@current_user.id == @user.id)%>
+   <h2><%= "Name: #{@user.name}" %></h2>
       <%= link_to request_status(current_user.id,@user.id), send_req_user_path(:id => @user.id), class: "link-blue py-4"%>
 
       <% if request_status(current_user.id,@user.id) == 'Accept request'%>
    
-    <%= link_to 'Delete request', send_req_user_path(:id => @user.id), class: "link-blue py-4"%>
+    <%= link_to 'Delete request', delete_req_user_path(:id => @user.id), method: :delete, data: {confirm: "You are about to delete this request"}, class: "link-blue py-4"%>
   
       <% end %>
     <% end%>
+      <% if current_user == @user %>
+
+       <p class="friends">Total number of Friends <%= @user.inverse_friendships.all.count%></p>
+      <% elsif%>
+        <p>Mutual Friends</p>
+        <%= @mutual %>
+
+      <% end %>
  
 </div>
   </div>

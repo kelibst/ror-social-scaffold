@@ -8,30 +8,52 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @mutual = mutual_friends(current_user, @user)
     @posts = @user.posts.ordered_by_most_recent
   end
 
   def req_init
-    set_friendship = Friendship.where(user_id: params[:id], friend_id: current_user.id)
+    set_friendship = Friendship.where(user_id: params[:id], friend_id: current_user.id, confirmed: false)
     if set_friendship.exists?
       set_friendship.update_all(confirmed: true)
-      redirect_to users_path
+
+      redirect_to users_path, notice: 'Friend request is confirmed!'
       return
     end
     new_friendship = Friendship.where(user_id: current_user.id, friend_id: params[:id]).exists?
     if !new_friendship
-      friend_obj = Friendship.new(user_id: current_user.id, friend_id: params[:id], confirmed: false)
-      friend_obj.save
+      send_request(current_user.id, params[:id])
     else
-      friend_obj = Friendship.where(user_id: current_user.id, friend_id: params[:id]).select('id')
-      Friendship.destroy(friend_obj.ids)
+      cancel_request(current_user.id, params[:id])
     end
-    redirect_to users_path
   end
 
-  def destroy
-    friend_obj = Friendship.where(user_id: current_user.id, friend_id: params[:id]).select('id')
-    Friendship.destroy(friend_obj.ids)
+  def send_request(current_user_id, friend_id)
+    friend = Friendship.new(user_id: current_user_id, friend_id: friend_id, confirmed: false)
+    friend.save
+    redirect_to users_path, notice: 'Friend request is sent!'
+  end
+
+  def cancel_request(current_user, friend_id)
+    friend = Friendship.where(user_id: current_user, friend_id: friend_id).select('id')
+    Friendship.destroy(friend.ids)
+    redirect_to users_path, notice: 'Friend request is cancelled!'
+  end
+
+  def mutual_friends(current_user, user)
+    counter = 0
+    user.friendships.confirmed.each do |_mutual|
+      counter += 1 if current_user.friendships.isFriends(current_user, user)
+    end
+    counter
+  end
+
+  def destroy_req
+    friend = Friendship.where(user_id: params[:id], friend_id: current_user.id)
+    friend_inverse = Friendship.where(user_id: current_user.id, friend_id: params[:id])
+    Friendship.destroy(friend.ids)
+    Friendship.destroy(friend_inverse.ids)
+    redirect_to users_path, notice: 'Friend request is deleted!'
   end
 
   private
