@@ -22,14 +22,22 @@ class UsersController < ApplicationController
     end
     new_friendship = Friendship.where(user_id: current_user.id, friend_id: params[:id]).exists?
     if !new_friendship
-      friend_obj = Friendship.new(user_id: current_user.id, friend_id: params[:id], confirmed: false)
-      friend_obj.save
-      redirect_to users_path, notice: 'Friend request is sent!'
+      send_request(current_user.id, params[:id])
     else
-      friend_obj = Friendship.where(user_id: current_user.id, friend_id: params[:id]).select('id')
-      Friendship.destroy(friend_obj.ids)
-      redirect_to users_path, notice: 'Friend request is cancelled!'
+     cancel_request(current_user.id, params[:id])
     end
+  end
+
+  def send_request(current_user_id, friend_id)
+    friend = Friendship.new(user_id: current_user_id, friend_id: friend_id, confirmed: false)
+    friend.save
+    redirect_to users_path, notice: 'Friend request is sent!'
+  end
+
+  def cancel_request(current_user, friend_id)
+    friend = Friendship.where(user_id: current_user, friend_id:friend_id).select('id')
+    Friendship.destroy(friend.ids)
+    redirect_to users_path, notice: 'Friend request is cancelled!'
   end
 
   def mutual_friends(current_user, user)
