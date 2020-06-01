@@ -9,9 +9,8 @@
 
 ## Live Demo
 
-# ([Live link](https://www.theodinproject.com/courses/ruby-on-rails/lessons/authentication))
+Check the live version ([here](https://secure-beyond-17280.herokuapp.com/))
 
-TBA
 
 
 ## Getting Started
@@ -39,9 +38,6 @@ Setup database with:
    rails db:migrate
 ```
 
-## Live link
-
-
 ### Usage
 
 Start server with:
@@ -58,15 +54,28 @@ Open `http://localhost:3000/` in your browser.
     rpsec --format documentation
 ```
 
-> Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
-
 ### Deployment
 
-TBA
+```
+heroku create
+
+git push heroku master
+
+heroku run rake db:migrate
+
+heroku ps:scale web=1
+```
+
+Full instruction  ([here](https://devcenter.heroku.com/articles/getting-started-with-rails5))
 
 ## Authors
 
-TBA
+👤 **Kelly Booster**
+
+- Github: [@kelibst](https://github.com/kelibst)
+- Twitter: [@keli_booster](https://twitter.com/keli_booster)
+- Linkedin: [Kekeli (Jiresse) Dogbevi
+](https://www.linkedin.com/in/kekeli-dogbevi-958272108/)
 
 ## 🤝 Contributing
 
@@ -80,9 +89,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-TBA
+Microverse Inc
 
 ## 📝 License
 
-TBA
 
