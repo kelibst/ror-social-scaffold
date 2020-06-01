@@ -12,4 +12,6 @@
         password: "password#{user}",
         name: "user#{user}"
     )
+
+    puts "5 users created!"
 end
