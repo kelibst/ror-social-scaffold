@@ -10,9 +10,14 @@
   
       <% end %>
     <% end%>
+      <% if current_user == @user %>
 
-    <p>Mutual Friends</p>
-      <%= @mutual unless current_user == @user%>
+       <p class="friends">Total number of Friends <%= @user.inverse_friendships.count%></p>
+      <% elsif%>
+        <p>Mutual Friends</p>
+        <%= @mutual %>
+
+      <% end %>
  
 </div>
   </div>
