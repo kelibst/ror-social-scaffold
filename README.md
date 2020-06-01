@@ -9,6 +9,8 @@
 
 ## Live Demo
 
+# ([Live link](https://www.theodinproject.com/courses/ruby-on-rails/lessons/authentication))
+
 TBA
 
 
@@ -37,6 +39,7 @@ Setup database with:
    rails db:migrate
 ```
 
+## Live link
 
 
 ### Usage
