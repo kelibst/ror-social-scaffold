@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     if !new_friendship
       send_request(current_user.id, params[:id])
     else
-     cancel_request(current_user.id, params[:id])
+      cancel_request(current_user.id, params[:id])
     end
   end
 
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def cancel_request(current_user, friend_id)
-    friend = Friendship.where(user_id: current_user, friend_id:friend_id).select('id')
+    friend = Friendship.where(user_id: current_user, friend_id: friend_id).select('id')
     Friendship.destroy(friend.ids)
     redirect_to users_path, notice: 'Friend request is cancelled!'
   end
